@@ -1,21 +1,42 @@
-//look up util.promisfy  allow the use of ID's since no DB being built
+const express =require ('express');
 const util = require('util');
+const path =require('path');
 const fs = require('fs');
+const router = require('../routes/apiRoutes');
 
 const stat = util.promisify(fs.stat);
 
-async function callStat() {
-  const stats = await stat('.');
-  console.log(`This directory is owned by ${stats.uid}`);
+//add a note, update a note, delete a note
+
+  // goes only to notes.html
+router.get('/notes'), (req, res)=> {
+  res.
+  sendfile(path.join(__dirname, '../public/notes.html'));
+}
+  //* is Wildcard, all routs not notes will go to index
+router.get('*'), (req, res)=> {
+  res.sendfile(path.join(__dirname, '../public/index.html'));
 }
 
-//TODO write getNotes()
-GeolocationCoordinates(){
-  return read.then{
-    //parse the notes to return as parsed notes
-  }
+// Setup post route (post creates or updates data )
+app.post("/api/notes", function(req, res) {
+  // Receives a current note, adds it to db.json, then returns the current note
+  let currentNote = req.body;
+  notes.push(currentNote);
+  updateDb();
+  return console.log("Current note: "+currentNote.title);
+});
+
+//writes to the json file whenever a note is added or deleted
+function updateDb() {
+  fs.writeFile("db/db.json",JSON.stringify(notes,'\t'),err => {
+      if (err) throw err;
+      return true;
+  });
 }
-//funtionality of getNotes:
-//API route calls getNotes
-// then they are reurned as json in apiRoutes
-//
+
+module.export = stores
+
+
+
+
